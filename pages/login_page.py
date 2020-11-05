@@ -20,3 +20,9 @@ class LoginPage(BasePage):
         assert self.is_element_present(*LoginPageLocators.REGISTRATION_EMAIL_FORM), 'Not found email_form in registration'
         assert self.is_element_present(*LoginPageLocators.REGISTRATION_PASSWORD_FORM), 'Not found first password_form in registration'
         assert self.is_element_present(*LoginPageLocators.REGISTRATION_RETURN_PASSWORD_FORM), 'Not found second password_form in registration'
+
+    def register_new_user(self, email, password):
+        self.browser.find_element(*LoginPageLocators.REGISTRATION_EMAIL_FORM).send_keys(email)
+        self.browser.find_element(*LoginPageLocators.REGISTRATION_PASSWORD_FORM).send_keys(password)
+        self.browser.find_element(*LoginPageLocators.REGISTRATION_RETURN_PASSWORD_FORM).send_keys(password)
+        self.browser.find_element(*LoginPageLocators.REGISTRATION_BUTTON).click()
