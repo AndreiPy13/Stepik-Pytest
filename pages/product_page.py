@@ -2,6 +2,7 @@ from .base_page import BasePage
 from .locators import ProductPageLocators
 from selenium.common.exceptions import NoAlertPresentException, NoSuchElementException
 import math
+import pytest
 
 
 class ProductPage(BasePage):
@@ -44,8 +45,14 @@ class ProductPage(BasePage):
 
     def control_price(self):
         price_in_notice = self.browser.find_element(*ProductPageLocators.PRICE_IN_NOTIFICATION).text
-        price_product =self.browser.find_element(*ProductPageLocators.PRICE_PRODUCT).text
+        price_product = self.browser.find_element(*ProductPageLocators.PRICE_PRODUCT).text
         assert price_in_notice == price_product
 
 
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
 
+    def should_dissapear_of_success_message(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "The success message does not disappear"
