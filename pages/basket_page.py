@@ -17,7 +17,7 @@ class BasketPage(BasePage):
 
     def text_in_basket_when_no_products(self):
         text = self.browser.find_element(*BasketPageLocators.BUTTON_0_TEXT).text
-        assert text == 'Ваша корзина пуста Продолжить покупки'
+        assert text == 'Your basket is empty. Continue shopping'
 
 
     def empty_basket(self):
