@@ -6,16 +6,24 @@ import pytest
 
 
 class ProductPage(BasePage):
-    def test_guest_can_add_product_to_basket(self):
-        self.promo_in_URL()
+    def test_guest_can_add_product_to_basket_PROMO(self):
+        self.promo_in_URL_offer()
         self.click_to_add_in_basket()
         self.math_answer()
         self.control_text()
         self.control_price()
 
-    def promo_in_URL(self):
+
+    def test_guest_can_add_product_to_basket_NewYear(self):
+        self.promo_in_URL_NewYear()
+        self.click_to_add_in_basket()
+        self.math_answer()
+        self.control_text()
+        self.control_price()
+
+    def promo_in_URL_offer(self):
         assert '?promo=offer' in self.browser.current_url, 'in URL not found promo offer'
-        #assert '?promo=newYear' in self.browser.current_url, 'in URL not found promo newYear'
+        
 
     def click_to_add_in_basket(self):
         button = self.browser.find_element(*ProductPageLocators.BASKET_FORM)
@@ -36,6 +44,9 @@ class ProductPage(BasePage):
         except NoAlertPresentException:
             print("No second alert presented")
 
+
+    def promo_in_URL_NewYear(self):
+        assert '?promo=newYear' in self.browser.current_url, 'in URL not found promo newYear'
 
     def control_text(self):
         name_in_notice = self.browser.find_element(*ProductPageLocators.NAME_IN_NOTIFICATION).text
